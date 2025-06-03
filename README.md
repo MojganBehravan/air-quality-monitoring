@@ -64,6 +64,17 @@ The dashboard is available at `http://localhost:8501`
 
 Since the Storage Layer (HDFS) must be initialized before any data is ingested or processed, follow this sequence to ensure all required folders (`/raw`, `/processed`) exist before the pipeline starts.
 
+### 📥 Dataset Setup
+
+Before running the pipeline, you must download the air pollution dataset:
+
+1. Download it from Kaggle:  
+   👉 https://www.kaggle.com/datasets/sogun3/uspollution
+
+2. Place the downloaded CSV file (e.g., `pollution_us_2000_2016.csv`) into the `data/` directory at the root of the project:
+> ⚠️ Ensure the filename matches what the `ingest.py` script expects. If different, update the script accordingly.
+
+### 🧭 Execution Steps
 
 ```bash
 # Step 1: Start only HDFS components
