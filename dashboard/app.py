@@ -46,7 +46,7 @@ selected_state = st.selectbox("Select State", states)
 selected_year = st.selectbox("Select Year", years)
 
 if st.button("Filter Data"):
-    params = {"state": selected_state, "year": str(selected_year)}
+    params = {"State": selected_state, "year": str(selected_year)}
     response = requests.get(filter_url, params=params)
 
     if response.status_code == 200:
@@ -56,7 +56,7 @@ if st.button("Filter Data"):
         else:
             df = pd.DataFrame(results)
 
-            required_fields = {"avg_CO", "avg_NO2", "avg_O3", "avg_SO2", "Date Local", "state"}
+            required_fields = {"avg_CO", "avg_NO2", "avg_O3", "avg_SO2", "Date Local", "State"}
             if not required_fields.issubset(df.columns):
                 st.error("Expected fields not found in the data.")
             else:
