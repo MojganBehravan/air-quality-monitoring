@@ -76,14 +76,19 @@ Before running the pipeline, you must download the air pollution dataset:
 
 ### 🧭 Execution Steps
 
+After cloning the repository:
+
 ```bash
+# Step 0: Build the Docker images (only needed the first time or if Dockerfiles change)
+docker-compose build
+
 # Step 1: Start only HDFS components
 docker-compose up -d namenode datanode
 
 # Step 2: Run the HDFS setup script to create required folders
 python ingestion/setup_hdfs.py
 
-# Step 3: Start the rest of the pipeline (Airflow, Spark, MongoDB, etc.)
+# Step 3: Start the rest of the pipeline (Airflow, Spark, MongoDB, Flask, Streamlit, etc.)
 docker-compose up -d
 ```
 
