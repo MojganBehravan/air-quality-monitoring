@@ -17,7 +17,7 @@ print(" DataFrame preview done")
 df_clean = df.dropna()
 
 # Transform: average pollution per state and date
-df_agg = df_clean.groupBy("state", "Date Local").agg(
+df_agg = df_clean.groupBy("State", "Date Local").agg(
     avg("NO2 Mean").alias("avg_NO2"),
     avg("O3 AQI").alias("avg_O3"),
     avg("SO2 AQI").alias("avg_SO2"),
