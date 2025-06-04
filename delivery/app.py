@@ -22,7 +22,7 @@ def filter_summary():
     filters = request.args if request.method == "GET" else request.json
     query = {}
     if "state" in filters:
-        query["state"] = filters["state"]
+        query["State"] = filters["State"]
     if "year" in filters:
         query["Date Local"] = {"$regex": f"^{filters['year']}"}
     records = list(collection.find(query).limit(50))
@@ -33,7 +33,7 @@ def filter_summary():
 @app.route("/metadata", methods=["GET"])
 def get_metadata():
     years = collection.distinct("Date Local")
-    states = collection.distinct("state")
+    states = collection.distinct("State")
 
     # Extract unique years from ISO date strings
     years_clean = sorted(set(str(date)[:4] for date in years if date))
