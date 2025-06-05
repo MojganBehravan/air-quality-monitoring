@@ -4,7 +4,7 @@ import os
 import time
 import re
 
-HDFS_URL = os.getenv("HDFS_URL", "http://namenode:50070")  # adjust if 9870 is needed
+HDFS_URL = os.getenv("HDFS_URL", "http://namenode:50070")  
 HDFS_USER = os.getenv("HDFS_USER", "hadoop")
 LOCAL_DATA_DIR = "/data"
 HDFS_DEST_DIR = "/user/hadoop/raw"
@@ -44,8 +44,9 @@ def main():
         # Retry uploading file to HDFS
         for _ in range(10):
             try:
-                df = pd.read_csv(local_file_path)
-                client.write(hdfs_file_path, data=df.to_csv(index=False), overwrite=True, encoding='utf-8')
+                with open(local_file_path, "rb") as f:
+                 client.write(hdfs_file_path, f, overwrite=True)
+
                 print(f" Uploaded {file} to {hdfs_file_path}")
                 with open(TRACKING_FILE, "a") as track:
                     track.write(file + "\n")
