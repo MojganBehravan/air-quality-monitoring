@@ -88,18 +88,14 @@ docker-compose up -d namenode datanode
 # Step 2: Run the HDFS setup script to create required folders
 python ingestion/setup_hdfs.py
 
-# Step 3: Start the rest of the pipeline (Airflow, Spark, MongoDB, Flask, Streamlit, etc.)
-docker-compose up -d
-# Step 3: Verify folders (optional)
-docker exec -it namenode hdfs dfs -ls /user/hadoop/
-
-# Step 4: Ingest raw data to HDFS (this copies CSV to /user/hadoop/raw)
+# Step 3: Ingest raw data to HDFS (this copies CSV to /user/hadoop/raw)
 docker-compose up --no-deps --build ingestion
 
-# Step 5: Run Spark to process the data and create summary.json
+# Step 4: Run Spark to process the data and create summary.json
 docker-compose up --no-deps --build spark
+Check the summary file created:  docker exec -it namenode hdfs dfs -ls /user/hadoop/processed
 
-# Step 6: Load summary.json into MongoDB
+# Step 5: Load summary.json into MongoDB
 docker-compose up -d mongodb
 docker-compose up --no-deps --build data_layer
 
