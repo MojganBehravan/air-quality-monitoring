@@ -99,7 +99,7 @@ Check the summary file created:  docker exec -it namenode hdfs dfs -ls /user/had
 docker-compose up -d mongodb
 docker-compose up --no-deps --build data_layer
 
-# Step 7: Start the rest (API, dashboard, airflow)
+# Step 6: Start the rest (API, dashboard, airflow)
 docker-compose up -d airflow airflow-scheduler delivery dashboard
 
 ```
